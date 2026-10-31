@@ -3,19 +3,30 @@
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/students', [StudentController::class, 'index']);
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+// READ - Display all students
+Route::get('/students', [StudentController::class, 'index'])
+    ->name('students.index');
+
+// CREATE - Show form
+Route::get('/students/create', [StudentController::class, 'create'])
+    ->name('students.create');
+
+// CREATE - Store student
+Route::post('/students', [StudentController::class, 'store'])
+    ->name('students.store');
+
+// UPDATE - Show edit form
+Route::get('/students/{id}/edit', [StudentController::class, 'edit'])
+    ->name('students.edit');
+
+// UPDATE - Save changes
+Route::put('/students/{id}', [StudentController::class, 'update'])
+    ->name('students.update');
+
+// DELETE - Remove student
+Route::delete('/students/{id}', [StudentController::class, 'destroy'])
+    ->name('students.destroy');
